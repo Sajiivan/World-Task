@@ -1,0 +1,77 @@
+show databases;
+use sakila;
+show tables;
+
+select * from actor;
+select * from film;
+select * from film_actor;
+select * from film_category;	
+select * from category;
+select * from staff_list;
+select * from staff;
+
+select last_name from actor where first_name='John'; 
+
+
+select * from actor where last_name='Neeson';
+
+
+select * from actor a where not	a.actor_id%10 <> 0;
+
+
+select description from film where film_id=100;
+
+
+select * from film where rating='R';
+
+
+select * from film where rating!='R';
+
+
+
+select length, title from film order by length asc limit 10 ;
+
+
+select * from film where length = ( select max(length) from film);
+
+
+select * from film where special_features like '%deleted scenes%';
+
+
+select last_name
+from actor 
+group by last_name
+having count(last_name)=1
+order by last_name desc;
+
+
+select last_name, count(last_name) as frequency
+from actor 
+group by last_name
+having frequency>1
+order by frequency desc;
+
+
+select f.actor_id,  a.first_name, a.last_name, count(f.actor_id) from film_actor f join actor a  on f.actor_id=a.actor_id group by f.actor_id order by count(f.actor_id) desc limit 1;
+
+
+
+select avg(length) from film;
+
+
+select avg(f.length), c.category_id, c.name from category c join film_category fc on c.category_id=fc.category_id join film f on f.film_id=fc.film_id group by category_id order by length;
+
+
+ select * from film where description like '%robot%';
+
+
+select * from film where release_year=2010;
+
+
+select f.title, c.name, c.category_id from film f join film_category fc on f.film_id=fc.film_id join category c on fc.category_id=c.category_id where c.name='Horror';
+ 
+ 
+ select First_Name, Last_Name from staff where staff_id=2;
+ 
+ 
+ select * from actor where First_Name='Fred';
